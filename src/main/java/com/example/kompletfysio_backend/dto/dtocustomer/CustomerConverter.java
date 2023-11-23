@@ -9,10 +9,11 @@ public class CustomerConverter {
     public CustomerDTO toDTO(CustomerEntity customer){
         return new CustomerDTO(
                 customer.getCustomerId(),
-                customer.getName(),
+                customer.getFirstName(),
+                customer.getLastName(),
                 customer.getDateOfBirth(),
                 customer.getAddress(),
-                customer.getPersonalIdentificationNumber(),
+                customer.getCpr(),
                 customer.getUsername(),
                 customer.getPassword(),
                 customer.getCity()
@@ -21,10 +22,11 @@ public class CustomerConverter {
 
     public CustomerEntity toEntity(CustomerDTO customerDTO){
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setName(customerDTO.name());
+        customerEntity.setFirstName(customerDTO.firstName());
+        customerEntity.setLastName(customerDTO.lastName());
         customerEntity.setDateOfBirth(customerDTO.dateOfBirth());
         customerEntity.setAddress(customerDTO.address());
-        customerEntity.setPersonalIdentificationNumber(customerDTO.personalIdentificationNumber());
+        customerEntity.setCpr(customerDTO.cpr());
         customerEntity.setUsername(customerDTO.username());
         customerEntity.setPassword(customerDTO.password());
         customerEntity.setCity(customerDTO.city());
