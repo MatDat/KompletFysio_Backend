@@ -6,6 +6,5 @@ import com.example.kompletfysio_backend.model.UnavailableEntity;
 
 import java.util.Set;
 
-public record EmployeeDTO(int employeeId, String name, String username, String password, boolean isPartner,
-                          Set<UnavailableEntity> unavailable, Set<AppointmentEntity> appointment, Set<GeneralAvailabilityEntity> generalAvailability) {
+public record EmployeeDTO(int employeeId, String name, String username, String password, boolean isPartner) {
 }

@@ -15,22 +15,20 @@ public class CustomerConverter {
                 customer.getPersonalIdentificationNumber(),
                 customer.getUsername(),
                 customer.getPassword(),
-                customer.getAppointment(),
                 customer.getCity()
         );
     }
 
     public CustomerEntity toEntity(CustomerDTO customerDTO){
-        return new CustomerEntity(
-                customerDTO.customerId(),
-                customerDTO.name(),
-                customerDTO.dateOfBirth(),
-                customerDTO.address(),
-                customerDTO.personalIdentificationNumber(),
-                customerDTO.username(),
-                customerDTO.password(),
-                customerDTO.appointment(),
-                customerDTO.city()
-        );
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setName(customerDTO.name());
+        customerEntity.setDateOfBirth(customerDTO.dateOfBirth());
+        customerEntity.setAddress(customerDTO.address());
+        customerEntity.setPersonalIdentificationNumber(customerDTO.personalIdentificationNumber());
+        customerEntity.setUsername(customerDTO.username());
+        customerEntity.setPassword(customerDTO.password());
+        customerEntity.setCity(customerDTO.city());
+        return customerEntity;
     }
+
 }
