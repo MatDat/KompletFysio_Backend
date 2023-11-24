@@ -11,16 +11,9 @@ public class TreatmentConverter {
                 treatment.getTreatmentId(),
                 treatment.getTreatmentName(),
                 treatment.getPrice(),
-                treatment.getDuration()
+                treatment.getDuration().getDurationId()
         );
     }
 
-    public TreatmentEntity toEntity(TreatmentDTO treatmentDTO) {
-        return new TreatmentEntity(
-                treatmentDTO.treatmentId(),
-                treatmentDTO.treatmentName(),
-                treatmentDTO.price(),
-                treatmentDTO.duration()
-        );
-    }
+    //We removed toEntity because it doesn't work with durationId, so we'll have to do it in service
 }
