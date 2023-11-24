@@ -40,19 +40,23 @@ public class TreatmentConfig implements CommandLineRunner {
         durationRepository.save(duration30);
 
         TreatmentEntity treatmentMassage30 = new TreatmentEntity();
-        treatmentMassage30.setTreatmentName("");
+        treatmentMassage30.setTreatmentName("Massage [30 min]");
         treatmentMassage30.setPrice(310);
         treatmentMassage30.setDuration(duration30);
+        treatmentRepository.save(treatmentMassage30);
 
-        TreatmentEntity treatmentKneeFixFirst = new TreatmentEntity();
-        treatmentKneeFixFirst.setTreatmentName("");
-        treatmentKneeFixFirst.setPrice(650);
-        treatmentKneeFixFirst.setDuration(duration60);
+        TreatmentEntity treatmentGravidbehandling = new TreatmentEntity();
+        treatmentGravidbehandling.setTreatmentName("Gravidbehandling [60 min]");
+        treatmentGravidbehandling.setPrice(620);
+        treatmentGravidbehandling.setDuration(duration60);
+        treatmentRepository.save(treatmentGravidbehandling);
 
         TreatmentEntity treatmentElbowFixFirst = new TreatmentEntity();
-        treatmentElbowFixFirst.setTreatmentName("");
+        treatmentElbowFixFirst.setTreatmentName("TEMP");
         treatmentElbowFixFirst.setPrice(650);
         treatmentElbowFixFirst.setDuration(duration60);
+        treatmentRepository.save(treatmentElbowFixFirst);
+
 
     }
 }
