@@ -10,7 +10,8 @@ public class EmployeeConverter {
     public EmployeeDTO toDTO(EmployeeEntity employee) {
         return new EmployeeDTO(
                 employee.getEmployeeId(),
-                employee.getName(),
+                employee.getFirstName(),
+                employee.getLastName(),
                 employee.getUsername(),
                 employee.getPassword(),
                 employee.isPartner()
@@ -20,7 +21,8 @@ public class EmployeeConverter {
     public EmployeeEntity toEntity (EmployeeDTO employeeDTO) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setEmployeeId(employeeDTO.employeeId());
-        employeeEntity.setName(employeeDTO.name());
+        employeeEntity.setFirstName(employeeDTO.firstName());
+        employeeEntity.setLastName(employeeDTO.lastName());
         employeeEntity.setUsername(employeeDTO.username());
         employeeEntity.setPassword(employeeDTO.password());
         employeeEntity.setPartner(employeeDTO.isPartner());

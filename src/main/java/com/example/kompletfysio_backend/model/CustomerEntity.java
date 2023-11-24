@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,25 +16,28 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="customer_id")
+    @Column(name = "customer_id")
     private int customerId;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name="date_of_birth", nullable = false)
-    private Date dateOfBirth;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "date_of_birth", nullable = false)
+    private LocalDate dateOfBirth;
 
     @Column(nullable = false)
     private String address;
 
-    @Column(name="personal_identification_number", nullable = false)
-    private String personalIdentificationNumber;
+    @Column(nullable = false)
+    private String cpr;
 
     @Column(nullable = false)
     private String username;
@@ -41,11 +45,11 @@ public class CustomerEntity {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AppointmentEntity> appointment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="city_id", nullable = false)
+    @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 
 }

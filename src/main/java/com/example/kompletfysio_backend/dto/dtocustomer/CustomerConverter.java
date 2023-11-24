@@ -9,10 +9,11 @@ public class CustomerConverter {
     public CustomerDTO toDTO(CustomerEntity customer){
         return new CustomerDTO(
                 customer.getCustomerId(),
-                customer.getName(),
+                customer.getFirstName(),
+                customer.getLastName(),
                 customer.getDateOfBirth(),
                 customer.getAddress(),
-                customer.getPersonalIdentificationNumber(),
+                customer.getCpr(),
                 customer.getUsername(),
                 customer.getPassword(),
                 customer.getCity().getCityId()

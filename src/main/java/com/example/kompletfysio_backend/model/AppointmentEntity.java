@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -22,10 +23,10 @@ public class AppointmentEntity {
     private int appointmentId;
 
     @Column(name="start_time", nullable = false)
-    private Time startTime;         //Unsure of datatype
+    private LocalDateTime startTime;
 
     @Column(name="end_time", nullable = false)
-    private Time endTime;           //Unsure of datatype
+    private LocalDateTime endTime;
 
     private String note;
 
