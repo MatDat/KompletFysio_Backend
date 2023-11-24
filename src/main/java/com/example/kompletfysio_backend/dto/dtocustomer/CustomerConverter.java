@@ -15,20 +15,10 @@ public class CustomerConverter {
                 customer.getPersonalIdentificationNumber(),
                 customer.getUsername(),
                 customer.getPassword(),
-                customer.getCity()
+                customer.getCity().getCityId()
         );
     }
 
-    public CustomerEntity toEntity(CustomerDTO customerDTO){
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setName(customerDTO.name());
-        customerEntity.setDateOfBirth(customerDTO.dateOfBirth());
-        customerEntity.setAddress(customerDTO.address());
-        customerEntity.setPersonalIdentificationNumber(customerDTO.personalIdentificationNumber());
-        customerEntity.setUsername(customerDTO.username());
-        customerEntity.setPassword(customerDTO.password());
-        customerEntity.setCity(customerDTO.city());
-        return customerEntity;
-    }
+    //We removed toEntity because it doesn't work with durationId, so we'll have to do it in service
 
 }

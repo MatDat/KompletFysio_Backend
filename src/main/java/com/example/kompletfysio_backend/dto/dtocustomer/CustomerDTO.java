@@ -7,5 +7,5 @@ import java.util.Date;
 import java.util.Set;
 
 public record CustomerDTO(int customerId, String name, Date dateOfBirth, String address,
-                          String personalIdentificationNumber, String username, String password, CityEntity city) {
+                          String personalIdentificationNumber, String username, String password, int cityId) {
 }
