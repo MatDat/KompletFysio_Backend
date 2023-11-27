@@ -29,7 +29,7 @@ public class TreatmentEntity {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="duiration_id", nullable = false)
+    @JoinColumn(name="duration_id", nullable = false)
     @JsonBackReference
     private DurationEntity duration;
 }
