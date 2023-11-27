@@ -35,18 +35,18 @@ public class TreatmentConfig implements CommandLineRunner {
         TreatmentEntity treatmentMassage60 = initTreatmentEntity("Massage", 620, duration60);
         TreatmentEntity treatmentMassage90 = initTreatmentEntity("Massage", 930, duration90);
 
-        //INIT Fysio- & sportsfysioterapi
+        //INIT Fysio- & sportsfysioterapi treatments
         TreatmentEntity sportsfysioterapiFirst60 = initTreatmentEntity("sportsfysioterapiFirst", 650, duration60);
         TreatmentEntity sportsfysioterapi60 = initTreatmentEntity("sportsfysioterapi", 620, duration60);
         TreatmentEntity sportsfysioterapi45 = initTreatmentEntity("sportsfysioterapi", 620, duration45);
         TreatmentEntity sportsfysioterapi30 = initTreatmentEntity("sportsfysioterapi", 310, duration30);
         TreatmentEntity sportsfysioterapiEar30 = initTreatmentEntity("sportsfysioterapiEar", 75, duration30);
 
-        //INIT Gravid & efterfødsel
+        //INIT Gravid & efterfødsel treatments
         TreatmentEntity Gravidbehandling60 = initTreatmentEntity("Gravidbehandling", 620, duration60);
         TreatmentEntity Gravidbehandling30 = initTreatmentEntity("Gravidbehandling", 310, duration30);
 
-        //INIT Lungefysioterapi
+        //INIT Lungefysioterapi treatments
         TreatmentEntity Lunge60 = initTreatmentEntity("lunge", 650, duration60);
         TreatmentEntity Lunge30 = initTreatmentEntity("lunge", 465, duration45);
     }
