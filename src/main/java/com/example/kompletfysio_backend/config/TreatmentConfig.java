@@ -19,44 +19,51 @@ public class TreatmentConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        initTreatment();
+        initDurationAndTreatment();
     }
 
-    public void initTreatment(){
-        DurationEntity duration90 = new DurationEntity();
-        duration90.setDurationMinutes(90);
-        durationRepository.save(duration90);
+    public void initDurationAndTreatment() {
+        //INIT durations
+        DurationEntity duration90 = initDurationEntity(90);
+        DurationEntity duration60 = initDurationEntity(60);
+        DurationEntity duration45 = initDurationEntity(45);
+        DurationEntity duration30 = initDurationEntity(30);
 
-        DurationEntity duration60 = new DurationEntity();
-        duration60.setDurationMinutes(60);
-        durationRepository.save(duration60);
+        //INIT massage treatments
+        TreatmentEntity treatmentMassage30 = initTreatmentEntity("Massage", 310, duration30);
+        TreatmentEntity treatmentMassage45 = initTreatmentEntity("Massage", 465, duration45);
+        TreatmentEntity treatmentMassage60 = initTreatmentEntity("Massage", 620, duration60);
+        TreatmentEntity treatmentMassage90 = initTreatmentEntity("Massage", 930, duration90);
 
-        DurationEntity duration45 = new DurationEntity();
-        duration45.setDurationMinutes(45);
-        durationRepository.save(duration45);
+        //INIT Fysio- & sportsfysioterapi
+        TreatmentEntity sportsfysioterapiFirst60 = initTreatmentEntity("sportsfysioterapiFirst", 650, duration60);
+        TreatmentEntity sportsfysioterapi60 = initTreatmentEntity("sportsfysioterapi", 620, duration60);
+        TreatmentEntity sportsfysioterapi45 = initTreatmentEntity("sportsfysioterapi", 620, duration45);
+        TreatmentEntity sportsfysioterapi30 = initTreatmentEntity("sportsfysioterapi", 310, duration30);
+        TreatmentEntity sportsfysioterapiEar30 = initTreatmentEntity("sportsfysioterapiEar", 75, duration30);
 
-        DurationEntity duration30 = new DurationEntity();
-        duration30.setDurationMinutes(30);
-        durationRepository.save(duration30);
+        //INIT Gravid & efterfødsel
+        TreatmentEntity Gravidbehandling60 = initTreatmentEntity("Gravidbehandling", 620, duration60);
+        TreatmentEntity Gravidbehandling30 = initTreatmentEntity("Gravidbehandling", 310, duration30);
 
-        TreatmentEntity treatmentMassage30 = new TreatmentEntity();
-        treatmentMassage30.setTreatmentName("Massage [30 min]");
-        treatmentMassage30.setPrice(310);
-        treatmentMassage30.setDuration(duration30);
-        treatmentRepository.save(treatmentMassage30);
+        //INIT Lungefysioterapi
+        TreatmentEntity Lunge60 = initTreatmentEntity("lunge", 650, duration60);
+        TreatmentEntity Lunge30 = initTreatmentEntity("lunge", 465, duration45);
+    }
 
-        TreatmentEntity treatmentGravidbehandling = new TreatmentEntity();
-        treatmentGravidbehandling.setTreatmentName("Gravidbehandling [60 min]");
-        treatmentGravidbehandling.setPrice(620);
-        treatmentGravidbehandling.setDuration(duration60);
-        treatmentRepository.save(treatmentGravidbehandling);
+    private DurationEntity initDurationEntity(int minutes) {
+        DurationEntity duration = new DurationEntity();
+        duration.setDurationMinutes(minutes);
+        durationRepository.save(duration);
+        return duration;
+    }
 
-        TreatmentEntity treatmentElbowFixFirst = new TreatmentEntity();
-        treatmentElbowFixFirst.setTreatmentName("TEMP");
-        treatmentElbowFixFirst.setPrice(650);
-        treatmentElbowFixFirst.setDuration(duration60);
-        treatmentRepository.save(treatmentElbowFixFirst);
-
-
+    private TreatmentEntity initTreatmentEntity(String treatmentName, int price, DurationEntity duration) {
+        TreatmentEntity treatment = new TreatmentEntity();
+        treatment.setTreatmentName(treatmentName);
+        treatment.setPrice(price);
+        treatment.setDuration(duration);
+        treatmentRepository.save(treatment);
+        return treatment;
     }
 }
