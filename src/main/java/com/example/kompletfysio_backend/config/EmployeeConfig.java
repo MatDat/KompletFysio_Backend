@@ -37,7 +37,8 @@ public class EmployeeConfig implements CommandLineRunner {
 
     public void initEmployee(){
         //EMPLOYEE
-        EmployeeEntity anneFelskov = createEmployee("Anne", "Felskov", "Anne123", "4321ennA", true);
+        EmployeeEntity anneFelskov = createEmployee("Anne", "Felskov", "Anne123", "321ennA", true);
+        EmployeeEntity lasseBumbum = createEmployee("Lasse", "Bumbum", "Lasse123", "321essaL", false);
 
         //UNAVAILABLE
         LocalDateTime startDateTimeUnAv1 = LocalDateTime.of(2023, 11, 27, 12, 0);
@@ -69,12 +70,14 @@ public class EmployeeConfig implements CommandLineRunner {
         LocalDateTime endTimeLørdag = LocalDateTime.of(2023, 12, 1, 14, 0);
         createGeneralAvailability(DayOfWeek.LØRDAG, startTimeLørdag, endTimeLørdag, anneFelskov);
 
-        //APPOINTMENT
+        //APPOINTMENT - Mangler customer og treatment
         /*LocalDateTime appointOneStart = LocalDateTime.of(2023, 12, 1, 10, 0);
         LocalDateTime appointOneEnd = LocalDateTime.of(2023, 12, 1, 10, 30);
         createAppointment(appointOneStart, appointOneEnd, "Dagens 'note': Patientens tilstand kan beskrives " +
                 "som at være i 'god tilstand' med tilbøjelighed til periodiske 'glædesudbrud'. Anbefalet behandling: " +
                 "En daglig dosis af smil og en recept på positivitet!", ??, anneFelskov, ??);*/
+
+        //SKILLS
         }
 
     private EmployeeEntity createEmployee(
