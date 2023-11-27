@@ -38,7 +38,7 @@ public class TreatmentConfig implements CommandLineRunner {
         //INIT Fysio- & sportsfysioterapi treatments
         TreatmentEntity sportsfysioterapiFirst60 = initTreatmentEntity("sportsfysioterapiFirst", 650, duration60);
         TreatmentEntity sportsfysioterapi60 = initTreatmentEntity("sportsfysioterapi", 620, duration60);
-        TreatmentEntity sportsfysioterapi45 = initTreatmentEntity("sportsfysioterapi", 620, duration45);
+        TreatmentEntity sportsfysioterapi45 = initTreatmentEntity("sportsfysioterapi", 465, duration45);
         TreatmentEntity sportsfysioterapi30 = initTreatmentEntity("sportsfysioterapi", 310, duration30);
         TreatmentEntity sportsfysioterapiEar30 = initTreatmentEntity("sportsfysioterapiEar", 75, duration30);
 
