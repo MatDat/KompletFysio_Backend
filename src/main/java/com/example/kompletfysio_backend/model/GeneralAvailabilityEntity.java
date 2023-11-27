@@ -1,5 +1,6 @@
 package com.example.kompletfysio_backend.model;
 
+import com.example.kompletfysio_backend.model.enumPackage.DayOfWeek;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class GeneralAvailabilityEntity {
     private int generalAvailabilityId;
 
     @Column(name="day_of_week", nullable = false)
-    private LocalDateTime dayOfWeek;            //DENNE SKAL LAVES OM TIL ENUM, MÅSKE
+    private DayOfWeek dayOfWeek;
 
     @Column(name="start_time", nullable = false)
     private LocalDateTime startTime;

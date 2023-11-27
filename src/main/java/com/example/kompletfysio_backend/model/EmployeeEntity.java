@@ -36,6 +36,8 @@ public class EmployeeEntity {
     @Column(name="is_partner", nullable = false)
     private boolean isPartner;
 
+
+
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<UnavailableEntity> unavailable;
 
