@@ -2,6 +2,7 @@ package com.example.kompletfysio_backend.service;
 
 import com.example.kompletfysio_backend.dto.dtotreamtment.TreatmentConverter;
 import com.example.kompletfysio_backend.dto.dtotreamtment.TreatmentDTO;
+import com.example.kompletfysio_backend.model.CustomerEntity;
 import com.example.kompletfysio_backend.model.TreatmentEntity;
 import com.example.kompletfysio_backend.repository.TreatmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TreatmentService {
@@ -25,5 +27,10 @@ public class TreatmentService {
             treatmentDTOList.add(treatmentConverter.toDTO(treatmentEntity));
         }
         return treatmentDTOList;
+    }
+
+
+    public Optional<TreatmentEntity> findById(Long aLong) {
+        return treatmentRepository.findById(aLong.intValue());
     }
 }
