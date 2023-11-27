@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Set;
+
 @Component
 public class CustomerConfig implements CommandLineRunner {
 
@@ -22,11 +23,16 @@ public class CustomerConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        initCustomerAndCity();
+    }
+
+    public void initCustomerAndCity() {
         //INIT Cities
         CityEntity valby = initCityEntity("2500", "Valby");
         CityEntity holbaek = initCityEntity("4300", "Holbæk");
         CityEntity vig = initCityEntity("5460", "Vig");
 
+        //INIT Customers
         CustomerEntity customer1 = initCustomerEntity("John", "Doe",
                 LocalDate.of(1990, 5, 15),
                 "123 Main St", "DDmmYY1111", "john.doe@example.com", "password123", valby);
@@ -38,6 +44,7 @@ public class CustomerConfig implements CommandLineRunner {
         CustomerEntity customer3 = initCustomerEntity("Bob", "Johnson",
                 LocalDate.of(1978, 3, 10),
                 "789 Pine St", "DDmmYY3333", "bob.johnson@example.com", "password789", vig);
+
     }
 
     private CityEntity initCityEntity(String zipcode, String cityName) {
