@@ -34,9 +34,8 @@ public class GeneralAvailabilityRestController {
         // Parse the string into a LocalDate object
         LocalDate localDate = LocalDate.parse(date, formatter);
 
-        generalAvailabilityService.getAvailabilityFromEmployeeAndDate(1,localDate);
 
-        List<AvailabilityInterval> availabilityIntervalList = new ArrayList<>();
+        List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService.getAvailabilityFromEmployeeAndDate(1, localDate);
         System.out.println(employeeId + ", " + date);
         return new ResponseEntity<>(availabilityIntervalList, HttpStatus.OK);
     }

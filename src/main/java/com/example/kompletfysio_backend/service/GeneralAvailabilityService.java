@@ -30,16 +30,16 @@ public class GeneralAvailabilityService {
         Optional<GeneralAvailabilityEntity> gAEntity = generalAvailabilityRepository
                 .findByDayOfWeekAndEmployeeEmployeeId(convertToDayOfWeek(date), employeeId);
 
-        if (gAEntity.isEmpty()){
+        if (gAEntity.isEmpty()) {
             //handle expeption
         }
 
         Optional<List<UnavailableEntity>> optUnavailableEntities = unavailableRepository
-                        .findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqualOrderByStartTime(
-                                employeeId,
-                                date.atTime(LocalTime.MAX),
-                                date.atStartOfDay()
-                        );
+                .findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqualOrderByStartTime(
+                        employeeId,
+                        date.atTime(LocalTime.MAX),
+                        date.atStartOfDay()
+                );
 
         List<AvailabilityInterval> availabilityIntervals = new ArrayList<>();
         LocalDateTime startTime = gAEntity.get().getStartTime();
@@ -51,6 +51,10 @@ public class GeneralAvailabilityService {
 
             for (UnavailableEntity unavailableEntity : unavailableEntities) {
                 if (unavailableEntity.getStartTime().isEqual(startTime)) {
+                    if (unavailableEntity.getEndTime().isAfter(endTime) || unavailableEntity.getEndTime().isEqual(endTime)) {
+                        return null;
+                    }
+                    startTime = unavailableEntity.getEndTime();
                     continue;
                 }
                 availabilityIntervals.add(new AvailabilityInterval(startTime, unavailableEntity.getStartTime()));
@@ -62,7 +66,7 @@ public class GeneralAvailabilityService {
                 }
             }
         }
-        availabilityIntervals.add(new AvailabilityInterval(startTime,endTime));
+        availabilityIntervals.add(new AvailabilityInterval(startTime, endTime));
 
         for (int i = 0; i < availabilityIntervals.size(); i++) {
             System.out.println(availabilityIntervals.get(i));
