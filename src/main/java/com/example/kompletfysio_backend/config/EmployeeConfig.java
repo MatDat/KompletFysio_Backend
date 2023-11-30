@@ -35,7 +35,7 @@ public class EmployeeConfig implements CommandLineRunner {
     }
 
 
-    public void initEmployee(){
+    public void initEmployee() {
         //EMPLOYEE
         EmployeeEntity anneFelskov = createEmployee("Anne", "Felskov", "Anne123", "321ennA", true);
         EmployeeEntity lasseBumbum = createEmployee("Lasse", "Bumbum", "Lasse123", "321essaL", false);
@@ -78,14 +78,15 @@ public class EmployeeConfig implements CommandLineRunner {
                 "En daglig dosis af smil og en recept på positivitet!", ??, anneFelskov, ??);*/
 
         //SKILLS
-        }
+
+    }
 
     private EmployeeEntity createEmployee(
             String firstName,
             String lastName,
             String username,
             String password,
-            boolean isPartner){
+            boolean isPartner) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setFirstName(firstName);
         employeeEntity.setLastName(lastName);
@@ -99,8 +100,7 @@ public class EmployeeConfig implements CommandLineRunner {
     private UnavailableEntity createUnavailability(
             LocalDateTime startTime,
             LocalDateTime endTime,
-            EmployeeEntity employee)
-    {
+            EmployeeEntity employee) {
         UnavailableEntity unavailableEntity = new UnavailableEntity();
         unavailableEntity.setStartTime(startTime);
         unavailableEntity.setEndTime(endTime);
@@ -113,8 +113,7 @@ public class EmployeeConfig implements CommandLineRunner {
             DayOfWeek dayOfWeek,
             LocalDateTime startTime,
             LocalDateTime endTime,
-            EmployeeEntity employee)
-    {
+            EmployeeEntity employee) {
         GeneralAvailabilityEntity generalAvailability = new GeneralAvailabilityEntity();
         generalAvailability.setDayOfWeek(dayOfWeek);
         generalAvailability.setStartTime(startTime);
@@ -130,8 +129,7 @@ public class EmployeeConfig implements CommandLineRunner {
             String note,
             CustomerEntity customer,
             EmployeeEntity employee,
-            TreatmentEntity treatment)
-    {
+            TreatmentEntity treatment) {
         AppointmentEntity appointmentEntity = new AppointmentEntity();
         appointmentEntity.setStartTime(startTime);
         appointmentEntity.setEndTime(endTime);
@@ -145,8 +143,7 @@ public class EmployeeConfig implements CommandLineRunner {
 
     private List<TreatmentEntity> setEmployeeSkill(
             TreatmentEntity treatment,
-            EmployeeEntity employee)
-    {
+            EmployeeEntity employee) {
         List<TreatmentEntity> skillList = new ArrayList<>();
         skillList.add(treatment);
 

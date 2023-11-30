@@ -30,25 +30,25 @@ public class TreatmentConfig implements CommandLineRunner {
         DurationEntity duration30 = initDurationEntity(30);
 
         //INIT massage treatments
-        TreatmentEntity treatmentMassage30 = initTreatmentEntity("Massage", 310, duration30);
-        TreatmentEntity treatmentMassage45 = initTreatmentEntity("Massage", 465, duration45);
-        TreatmentEntity treatmentMassage60 = initTreatmentEntity("Massage", 620, duration60);
-        TreatmentEntity treatmentMassage90 = initTreatmentEntity("Massage", 930, duration90);
+        TreatmentEntity treatmentMassage90 = initTreatmentEntity("Massage (90 min)", 930, duration90);
+        TreatmentEntity treatmentMassage60 = initTreatmentEntity("Massage (60 min)", 620, duration60);
+        TreatmentEntity treatmentMassage45 = initTreatmentEntity("Massage (45 min)", 465, duration45);
+        TreatmentEntity treatmentMassage30 = initTreatmentEntity("Massage (30 min)", 310, duration30);
 
         //INIT Fysio- & sportsfysioterapi treatments
-        TreatmentEntity sportsfysioterapiFirst60 = initTreatmentEntity("sportsfysioterapiFirst", 650, duration60);
-        TreatmentEntity sportsfysioterapi60 = initTreatmentEntity("sportsfysioterapi", 620, duration60);
-        TreatmentEntity sportsfysioterapi45 = initTreatmentEntity("sportsfysioterapi", 620, duration45);
-        TreatmentEntity sportsfysioterapi30 = initTreatmentEntity("sportsfysioterapi", 310, duration30);
-        TreatmentEntity sportsfysioterapiEar30 = initTreatmentEntity("sportsfysioterapiEar", 75, duration30);
+        TreatmentEntity sportsfysioterapiFirst60 = initTreatmentEntity("Førstegangsbehandling (60 min)", 650, duration60);
+        TreatmentEntity sportsfysioterapi60 = initTreatmentEntity("Lang behandling (60 min)", 620, duration60);
+        TreatmentEntity sportsfysioterapi45 = initTreatmentEntity("Normal behandling (45 min)", 465, duration45);
+        TreatmentEntity sportsfysioterapi30 = initTreatmentEntity("Normal behandling (30 min)", 310, duration30);
+        TreatmentEntity sportsfysioterapiEar30 = initTreatmentEntity("NADA øreakupunktur (30 min)", 75, duration30);
 
         //INIT Gravid & efterfødsel treatments
-        TreatmentEntity Gravidbehandling60 = initTreatmentEntity("Gravidbehandling", 620, duration60);
-        TreatmentEntity Gravidbehandling30 = initTreatmentEntity("Gravidbehandling", 310, duration30);
+        TreatmentEntity Gravidbehandling60 = initTreatmentEntity("Gravidbehandling (60 min)", 620, duration60);
+        TreatmentEntity Gravidbehandling30 = initTreatmentEntity("Kort behandling (30 min)", 310, duration30);
 
         //INIT Lungefysioterapi treatments
-        TreatmentEntity Lunge60 = initTreatmentEntity("lunge", 650, duration60);
-        TreatmentEntity Lunge30 = initTreatmentEntity("lunge", 465, duration45);
+        TreatmentEntity Lunge60 = initTreatmentEntity("Første lunge konsultation (60 min)", 650, duration60);
+        TreatmentEntity Lunge30 = initTreatmentEntity("Normal behandling (45 min)", 465, duration45);
     }
 
     private DurationEntity initDurationEntity(int minutes) {

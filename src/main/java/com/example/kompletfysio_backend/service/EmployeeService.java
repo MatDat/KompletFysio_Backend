@@ -1,35 +1,29 @@
 package com.example.kompletfysio_backend.service;
 
-import com.example.kompletfysio_backend.JwtTokenManager;
 import com.example.kompletfysio_backend.config.SecurityConfiguration;
 import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeConverter;
 import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeDTO;
 import com.example.kompletfysio_backend.model.EmployeeEntity;
+import com.example.kompletfysio_backend.model.EmployeeSkillEntity;
 import com.example.kompletfysio_backend.model.JwtResponseModel;
 import com.example.kompletfysio_backend.repository.EmployeeRepository;
+import com.example.kompletfysio_backend.repository.EmployeeSkillRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
-public class EmployeeService implements IEmployeeService{
+public class EmployeeService implements IEmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private EmployeeSkillRepository employeeSkillRepository;
+    private EmployeeConverter employeeConverter;
 
-    public ResponseEntity<JwtResponseModel> signup(EmployeeDTO employeeDTO){
+    public ResponseEntity<JwtResponseModel> signup(EmployeeDTO employeeDTO) {
         EmployeeEntity employee = new EmployeeEntity();
         employee.setEmployeeId(employeeDTO.employeeId());
         employee.setUsername(employeeDTO.username());
@@ -38,17 +32,35 @@ public class EmployeeService implements IEmployeeService{
         employee.setFirstName(employeeDTO.firstName());
         employee.setLastName(employeeDTO.lastName());
 
-        if(findByName(employee.getUsername()).size()==0) {
+        if (findByName(employee.getUsername()).size() == 0) {
             if (save(employee) != null) {
                 return ResponseEntity.ok(new JwtResponseModel("created user: " + employee.getUsername() + " pw: " + employee.getPassword()));
             } else {
                 return ResponseEntity.ok(new JwtResponseModel("error creating user: " + employee.getUsername()));
             }
-        }else {
+        } else {
             return ResponseEntity.ok(new JwtResponseModel("error: user exists: " + employee.getUsername()));
         }
     }
 
+    public List<EmployeeDTO> getEmployeesByTreatmentId(int treatment_id) {
+        //Get a list of employee skills, based on given treatmentId
+        List<EmployeeSkillEntity> employeeSkills = employeeSkillRepository.findByTreatment_TreatmentId(treatment_id);
+
+        //only add the capable employees to the list
+        List<EmployeeEntity> employeeList = new ArrayList<>();
+        for (int i = 0; i < employeeSkills.size(); i++) {
+            employeeList.add(employeeSkills.get(i).getEmployee());
+        }
+
+        //change employee to DTO instead of Entity
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        for (EmployeeEntity employee : employeeList) {
+            employeeDTOList.add(employeeConverter.toDTO(employee));
+        }
+
+        return employeeDTOList;
+    }
 
     @Override
     public Set<EmployeeEntity> findAll() {
