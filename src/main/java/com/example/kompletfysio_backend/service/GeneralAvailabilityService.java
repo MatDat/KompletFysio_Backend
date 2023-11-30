@@ -16,15 +16,28 @@ public class GeneralAvailabilityService {
     GeneralAvailabilityRepository generalAvailabilityRepository;
 
 
-    public void getAvailabilityFromEmployeeAndDate(int employeeId, LocalDate date){
+    public void getAvailabilityFromEmployeeAndDate(int employeeId, LocalDate date) {
 
+//        GeneralAvailabilityEntity gAEntity = generalAvailabilityRepository
+//                .findByDayOfWeekAndEmployeeEmployeeId(convertToDayOfWeek(date), employeeId);
         GeneralAvailabilityEntity gAEntity = generalAvailabilityRepository
-                .findByDayOfWeekAndEmployeeEmployeeId(DayOfWeek.SUNDAY, employeeId);
-
+                .findByDayOfWeekAndEmployeeEmployeeId(convertToDayOfWeek(date), employeeId);
         System.out.println(gAEntity.toString());
 
     }
 
+    private DayOfWeek convertToDayOfWeek(LocalDate date) {
+
+        return switch (date.getDayOfWeek()) {
+            case MONDAY -> DayOfWeek.MONDAY;
+            case TUESDAY -> DayOfWeek.TUESDAY;
+            case WEDNESDAY -> DayOfWeek.WEDNESDAY;
+            case THURSDAY -> DayOfWeek.THURSDAY;
+            case FRIDAY -> DayOfWeek.FRIDAY;
+            case SATURDAY -> DayOfWeek.SATURDAY;
+            case SUNDAY -> DayOfWeek.SUNDAY;
+        };
+    }
 
 
 }
