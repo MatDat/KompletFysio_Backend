@@ -18,14 +18,10 @@ public class GeneralAvailabilityService {
 
     public void getAvailabilityFromEmployeeAndDate(int employeeId, LocalDate date){
 
-//        GeneralAvailabilityEntity gAEntity = generalAvailabilityRepository
-//                .findByDayOfWeek(DayOfWeek.valueOf(String.valueOf(date.getDayOfWeek())));
         GeneralAvailabilityEntity gAEntity = generalAvailabilityRepository
-                .findByDayOfWeek(1);
+                .findByDayOfWeekAndEmployeeEmployeeId(DayOfWeek.SUNDAY, employeeId);
 
         System.out.println(gAEntity.toString());
-
-
 
     }
 

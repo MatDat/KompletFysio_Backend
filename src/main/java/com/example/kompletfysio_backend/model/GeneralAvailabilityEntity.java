@@ -19,6 +19,7 @@ public class GeneralAvailabilityEntity {
     @Column(name="general_availability_id")
     private int generalAvailabilityId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="day_of_week", nullable = false)
     private DayOfWeek dayOfWeek;
 
