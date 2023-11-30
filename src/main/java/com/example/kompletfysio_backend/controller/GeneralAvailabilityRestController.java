@@ -6,15 +6,15 @@ import com.example.kompletfysio_backend.service.UnavailableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class GeneralAvailabilityRestController {
 
@@ -26,7 +26,16 @@ public class GeneralAvailabilityRestController {
 
     @GetMapping("/getEmployeeHoursById/{employeeId}/{date}")
     public ResponseEntity<List<AvailabilityInterval>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
-                                                                              @PathVariable("date") Date date) {
+                                                                              @PathVariable("date") String date) {
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Parse the string into a LocalDate object
+        LocalDate localDate = LocalDate.parse(date, formatter);
+
+        generalAvailabilityService.getAvailabilityFromEmployeeAndDate(1,localDate);
+
         List<AvailabilityInterval> availabilityIntervalList = new ArrayList<>();
         System.out.println(employeeId + ", " + date);
         return new ResponseEntity<>(availabilityIntervalList, HttpStatus.OK);
