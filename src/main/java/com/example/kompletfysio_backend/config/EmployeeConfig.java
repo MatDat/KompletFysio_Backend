@@ -53,6 +53,10 @@ public class EmployeeConfig implements CommandLineRunner {
         LocalDateTime endDateTimeUnAv3 = LocalDateTime.of(2023, 11, 28, 11, 0);
         createUnavailability(startDateTimeUnAv3, endDateTimeUnAv3, anneFelskov);
 
+        LocalDateTime startDateTimeUnAv4 = LocalDateTime.of(2023, 11, 28, 8, 0);
+        LocalDateTime endDateTimeUnAv4 = LocalDateTime.of(2023, 11, 28, 9, 30);
+        createUnavailability(startDateTimeUnAv4, endDateTimeUnAv4, anneFelskov);
+
         //GENERAL AVAILABILITY
         LocalDateTime startTimeMonday = LocalDateTime.of(2023, 11, 27, 8, 0);
         LocalDateTime endTimeMonday = LocalDateTime.of(2023, 11, 27, 16, 0);

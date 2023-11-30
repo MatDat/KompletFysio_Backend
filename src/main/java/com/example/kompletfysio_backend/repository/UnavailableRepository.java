@@ -14,6 +14,6 @@ public interface UnavailableRepository extends JpaRepository<UnavailableEntity, 
 
 //    List<UnavailableEntity> findByEmployee_EmployeeIdAnd
 
-    Optional<List<UnavailableEntity>> findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+    Optional<List<UnavailableEntity>> findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqualOrderByStartTime(
             int employeeId, LocalDateTime endOfDay, LocalDateTime startOfDay);
 }

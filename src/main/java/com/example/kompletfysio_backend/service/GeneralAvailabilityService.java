@@ -35,7 +35,7 @@ public class GeneralAvailabilityService {
         }
 
         Optional<List<UnavailableEntity>> optUnavailableEntities = unavailableRepository
-                        .findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+                        .findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqualOrderByStartTime(
                                 employeeId,
                                 date.atTime(LocalTime.MAX),
                                 date.atStartOfDay()
