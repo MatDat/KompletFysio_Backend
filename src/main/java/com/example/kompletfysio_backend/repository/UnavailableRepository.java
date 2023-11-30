@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UnavailableRepository extends JpaRepository<UnavailableEntity, Integer> {
@@ -13,6 +14,6 @@ public interface UnavailableRepository extends JpaRepository<UnavailableEntity, 
 
 //    List<UnavailableEntity> findByEmployee_EmployeeIdAnd
 
-    List<UnavailableEntity> findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+    Optional<List<UnavailableEntity>> findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
             int employeeId, LocalDateTime endOfDay, LocalDateTime startOfDay);
 }

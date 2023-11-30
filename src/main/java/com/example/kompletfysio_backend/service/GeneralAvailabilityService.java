@@ -26,7 +26,7 @@ public class GeneralAvailabilityService {
     UnavailableRepository unavailableRepository;
 
 
-    public void getAvailabilityFromEmployeeAndDate(int employeeId, LocalDate date) {
+    public List<AvailabilityInterval> getAvailabilityFromEmployeeAndDate(int employeeId, LocalDate date) {
         Optional<GeneralAvailabilityEntity> gAEntity = generalAvailabilityRepository
                 .findByDayOfWeekAndEmployeeEmployeeId(convertToDayOfWeek(date), employeeId);
 
@@ -34,7 +34,7 @@ public class GeneralAvailabilityService {
             //handle expeption
         }
 
-        List<UnavailableEntity> unavailableEntities = unavailableRepository
+        Optional<List<UnavailableEntity>> optUnavailableEntities = unavailableRepository
                         .findByEmployee_EmployeeIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
                                 employeeId,
                                 date.atTime(LocalTime.MAX),
@@ -45,14 +45,30 @@ public class GeneralAvailabilityService {
         LocalDateTime startTime = gAEntity.get().getStartTime();
         LocalDateTime endTime = gAEntity.get().getEndTime();
 
-        for (UnavailableEntity unavailableEntity : unavailableEntities) {
-            if(startTime.isAfter(unavailableEntity.getStartTime()) && endTime.isBefore(unavailableEntity.getEndTime())){
+        if (optUnavailableEntities.isPresent()) {
+            System.out.println("TESTATVIKOMMERIND");
+            List<UnavailableEntity> unavailableEntities = optUnavailableEntities.get();
 
+            for (UnavailableEntity unavailableEntity : unavailableEntities) {
+                if (unavailableEntity.getStartTime().isEqual(startTime)) {
+                    continue;
+                }
+                availabilityIntervals.add(new AvailabilityInterval(startTime, unavailableEntity.getStartTime()));
+                if (unavailableEntity.getEndTime().isBefore(gAEntity.get().getEndTime())) {
+                    startTime = unavailableEntity.getEndTime();
+                } else {
+                    availabilityIntervals.add(new AvailabilityInterval(startTime, gAEntity.get().getEndTime()));
+                    break;
+                }
             }
         }
-        
+        availabilityIntervals.add(new AvailabilityInterval(startTime,endTime));
 
+        for (int i = 0; i < availabilityIntervals.size(); i++) {
+            System.out.println(availabilityIntervals.get(i));
+        }
 
+        return availabilityIntervals;
     }
 
     private DayOfWeek convertToDayOfWeek(LocalDate date) {
