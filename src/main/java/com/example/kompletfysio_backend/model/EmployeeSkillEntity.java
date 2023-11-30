@@ -25,7 +25,7 @@ public class EmployeeSkillEntity {
     private EmployeeEntity employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="appointment_id", nullable = false)
-    private AppointmentEntity appointment;
+    @JoinColumn(name="treatment_id", nullable = false)
+    private TreatmentEntity treatment;
 
 }
