@@ -11,7 +11,7 @@ public class TreatmentConverter {
                 treatment.getTreatmentId(),
                 treatment.getTreatmentName(),
                 treatment.getPrice(),
-                treatment.getDuration().getDurationId()
+                treatment.getDuration().getDurationMinutes()
         );
     }
 
