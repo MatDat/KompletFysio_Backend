@@ -75,6 +75,41 @@ public class GeneralAvailabilityService {
         return availabilityIntervals;
     }
 
+    public List<String> getAvailableTimeslots(List<AvailabilityInterval> list, int duration) {
+        List<String> timeslots = new ArrayList<>();
+        System.out.println("duration: " + duration);
+
+        for (int i = 0; i < list.size(); i++) {
+//            int startSlot = list.get(i).getStartTime().getHour()
+            LocalDateTime slot = list.get(i).getStartTime();
+            boolean toAddSlot = true;
+
+            while (toAddSlot) {
+//                System.out.println("duration = " + slot.plusMinutes(duration - 1));
+                if (slot.plusMinutes(duration - 1).isBefore(list.get(i).getEndTime())) {
+
+//
+                    String availableSlot = slot.getHour() + ":" + (slot.getMinute()==(0) ? "00" : slot.getMinute());
+                    timeslots.add(availableSlot);
+                    slot = slot.plusMinutes(duration);
+                    //System.out.println("duration = " + slot.plusMinutes(duration));
+                } else {
+                    toAddSlot = false;
+                }
+            }
+
+
+            //String endTime = list.get(i).getEndTime().getHour() + ":" + list.get(i).getEndTime().getMinute();
+
+            //lav intervaller indtil vi rammer endTime ;)
+            //System.out.println(startTime + ", " + endTime);
+
+        }
+
+        System.out.println(timeslots);
+        return timeslots;
+    }
+
     private DayOfWeek convertToDayOfWeek(LocalDate date) {
 
         return switch (date.getDayOfWeek()) {
