@@ -24,9 +24,11 @@ public class GeneralAvailabilityRestController {
     @Autowired
     UnavailableService unavailableService;
 
-    @GetMapping("/getEmployeeHoursById/{employeeId}/{date}")
+    @GetMapping("/getEmployeeHoursById/{employeeId}/{date}/{duration}")
     public ResponseEntity<List<AvailabilityInterval>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
-                                                                              @PathVariable("date") String date) {
+                                                                              @PathVariable("date") String date,
+                                                                              @PathVariable("duration") int duration)
+    {
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -37,6 +39,7 @@ public class GeneralAvailabilityRestController {
 
         List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService.getAvailabilityFromEmployeeAndDate(1, localDate);
         System.out.println(employeeId + ", " + date);
+        List<String> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration);
         return new ResponseEntity<>(availabilityIntervalList, HttpStatus.OK);
     }
 
