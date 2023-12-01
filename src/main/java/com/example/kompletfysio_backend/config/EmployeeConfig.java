@@ -45,30 +45,44 @@ public class EmployeeConfig implements CommandLineRunner {
         LocalDateTime endDateTimeUnAv1 = LocalDateTime.of(2023, 11, 27, 15, 0);
         createUnavailability(startDateTimeUnAv1, endDateTimeUnAv1, anneFelskov);
 
+        LocalDateTime startDateTimeUnAv3 = LocalDateTime.of(2023, 11, 28, 10, 0);
+        LocalDateTime endDateTimeUnAv3 = LocalDateTime.of(2023, 11, 28, 11, 0);
+        createUnavailability(startDateTimeUnAv3, endDateTimeUnAv3, anneFelskov);
+
+        LocalDateTime startDateTimeUnAv2 = LocalDateTime.of(2023, 11, 28, 12, 0);
+        LocalDateTime endDateTimeUnAv2 = LocalDateTime.of(2023, 11, 28, 15, 0);
+        createUnavailability(startDateTimeUnAv2, endDateTimeUnAv2, anneFelskov);
+
+        LocalDateTime startDateTimeUnAv4 = LocalDateTime.of(2023, 11, 28, 8, 0);
+        LocalDateTime endDateTimeUnAv4 = LocalDateTime.of(2023, 11, 28, 9, 30);
+        createUnavailability(startDateTimeUnAv4, endDateTimeUnAv4, anneFelskov);
+
+
+
         //GENERAL AVAILABILITY
         LocalDateTime startTimeMonday = LocalDateTime.of(2023, 11, 27, 8, 0);
         LocalDateTime endTimeMonday = LocalDateTime.of(2023, 11, 27, 16, 0);
-        createGeneralAvailability(DayOfWeek.MANDAG, startTimeMonday, endTimeMonday, anneFelskov);
+        createGeneralAvailability(DayOfWeek.MONDAY, startTimeMonday, endTimeMonday, anneFelskov);
 
         LocalDateTime startTimeTuesday = LocalDateTime.of(2023, 11, 28, 8, 0);
         LocalDateTime endTimeTuesday = LocalDateTime.of(2023, 11, 28, 16, 0);
-        createGeneralAvailability(DayOfWeek.TIRSDAG, startTimeTuesday, endTimeTuesday, anneFelskov);
+        createGeneralAvailability(DayOfWeek.TUESDAY, startTimeTuesday, endTimeTuesday, anneFelskov);
 
         LocalDateTime startTimeWednesday = LocalDateTime.of(2023, 11, 29, 8, 0);
         LocalDateTime endTimeWednesday = LocalDateTime.of(2023, 11, 29, 16, 0);
-        createGeneralAvailability(DayOfWeek.ONSDAG, startTimeWednesday, endTimeWednesday, anneFelskov);
+        createGeneralAvailability(DayOfWeek.WEDNESDAY, startTimeWednesday, endTimeWednesday, anneFelskov);
 
         LocalDateTime startTimeThursday = LocalDateTime.of(2023, 11, 30, 8, 0);
         LocalDateTime endTimeThursday = LocalDateTime.of(2023, 11, 30, 16, 0);
-        createGeneralAvailability(DayOfWeek.TORSDAG, startTimeThursday, endTimeThursday, anneFelskov);
+        createGeneralAvailability(DayOfWeek.THURSDAY, startTimeThursday, endTimeThursday, anneFelskov);
 
         LocalDateTime startTimeFriday = LocalDateTime.of(2023, 12, 1, 8, 0);
         LocalDateTime endTimeFriday = LocalDateTime.of(2023, 12, 1, 16, 0);
-        createGeneralAvailability(DayOfWeek.FREDAG, startTimeFriday, endTimeFriday, anneFelskov);
+        createGeneralAvailability(DayOfWeek.FRIDAY, startTimeFriday, endTimeFriday, anneFelskov);
 
         LocalDateTime startTimeLørdag = LocalDateTime.of(2023, 12, 1, 10, 0);
         LocalDateTime endTimeLørdag = LocalDateTime.of(2023, 12, 1, 14, 0);
-        createGeneralAvailability(DayOfWeek.LØRDAG, startTimeLørdag, endTimeLørdag, anneFelskov);
+        createGeneralAvailability(DayOfWeek.SATURDAY, startTimeLørdag, endTimeLørdag, anneFelskov);
 
         //APPOINTMENT - Mangler customer og treatment
         /*LocalDateTime appointOneStart = LocalDateTime.of(2023, 12, 1, 10, 0);
