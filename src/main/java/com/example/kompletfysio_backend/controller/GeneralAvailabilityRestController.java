@@ -25,22 +25,22 @@ public class GeneralAvailabilityRestController {
     UnavailableService unavailableService;
 
     @GetMapping("/getEmployeeHoursById/{employeeId}/{date}/{duration}")
-    public ResponseEntity<List<AvailabilityInterval>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
+    public ResponseEntity<List<String>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
                                                                               @PathVariable("date") String date,
                                                                               @PathVariable("duration") int duration)
     {
-
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         // Parse the string into a LocalDate object
         LocalDate localDate = LocalDate.parse(date, formatter);
 
-
+        //create the intervals where the employee can work in
         List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService.getAvailabilityFromEmployeeAndDate(1, localDate);
         System.out.println(employeeId + ", " + date);
+
+        //create the timeslot where the employee can be booked
         List<String> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration);
-        return new ResponseEntity<>(availabilityIntervalList, HttpStatus.OK);
+        return new ResponseEntity<>(timeslots, HttpStatus.OK);
     }
 
 

@@ -88,7 +88,8 @@ public class GeneralAvailabilityService {
 //                System.out.println("duration = " + slot.plusMinutes(duration - 1));
                 if (slot.plusMinutes(duration - 1).isBefore(list.get(i).getEndTime())) {
 
-                    String availableSlot = list.get(i).getStartTime().getHour() + ":" + list.get(i).getStartTime().getMinute();
+//
+                    String availableSlot = slot.getHour() + ":" + (slot.getMinute()==(0) ? "00" : slot.getMinute());
                     timeslots.add(availableSlot);
                     slot = slot.plusMinutes(duration);
                     //System.out.println("duration = " + slot.plusMinutes(duration));
