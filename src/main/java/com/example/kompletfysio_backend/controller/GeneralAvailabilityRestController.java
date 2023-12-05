@@ -41,6 +41,8 @@ public class GeneralAvailabilityRestController {
         //create the timeslot where the employee can be booked
         List<String> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration);
         return new ResponseEntity<>(timeslots, HttpStatus.OK);
+
+
     }
 
 
