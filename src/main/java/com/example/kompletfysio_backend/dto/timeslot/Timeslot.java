@@ -13,4 +13,9 @@ public class Timeslot {
     private int employeeID;
     private String timeslot;
 
+
+    public String getTimeSlot() {
+        return timeslot;
+    }
+
 }

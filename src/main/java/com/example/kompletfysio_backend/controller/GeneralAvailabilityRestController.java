@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -58,34 +59,36 @@ public class GeneralAvailabilityRestController {
         //find capable employees based on treatment_id
         List<EmployeeDTO> capableEmployeesDto = employeeService.getEmployeesByTreatmentId(treatmentId);
 
-
+        //makes a list of lists of availability intervals
         List<List<AvailabilityInterval>> availableIntervalListList = new ArrayList<>();
-
         for (EmployeeDTO employeeDTO : capableEmployeesDto){
-
             List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService
                     .getAvailabilityFromEmployeeAndDate(employeeDTO.employeeId(), localDate);
-            System.out.println(employeeDTO.employeeId() + ", " + date);
-
             availableIntervalListList.add(availabilityIntervalList);
         }
 
+        //Adds all timeslot in single arraylist (from multiple employees)
         List<Timeslot> timeslotList = new ArrayList<>();
         for (int i = 0; i < availableIntervalListList.size(); i++) {
             List<Timeslot> timeslots = generalAvailabilityService
                     .getAvailableTimeslots(availableIntervalListList.get(i),
                             duration,
                             availableIntervalListList.get(i).get(0).getEmployee_id());
-
             timeslotList.addAll(timeslots);
-
         }
 
-        LinkedHashSet<Timeslot> tempRemoveDublicates = (LinkedHashSet<Timeslot>) timeslotList;
-        List<Timeslot> timeslotsNoDuplicates = (List<Timeslot>) tempRemoveDublicates;
+        //removes duplicate timeslots:
+        for (int i = 0; i < timeslotList.size(); i++) {
+            for (int j = 0; j < timeslotList.size(); j++) {
+                if (timeslotList.get(i).getTimeSlot().equals(timeslotList.get(j).getTimeSlot()) &&
+                        timeslotList.get(i).getEmployeeID() !=  timeslotList.get(j).getEmployeeID() ){
+                    timeslotList.remove(timeslotList.get(j));
+                }
+            }
+        }
+        //TODO sort list by time early bird first
 
-        //TODO fix line below
-        return new ResponseEntity<>(timeslotsNoDuplicates, HttpStatus.OK);
+        return new ResponseEntity<>(timeslotList, HttpStatus.OK);
     }
 
 

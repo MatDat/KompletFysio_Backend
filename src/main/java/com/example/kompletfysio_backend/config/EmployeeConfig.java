@@ -84,6 +84,26 @@ public class EmployeeConfig implements CommandLineRunner {
         LocalDateTime endTimeLørdag = LocalDateTime.of(2023, 12, 1, 14, 0);
         createGeneralAvailability(DayOfWeek.SATURDAY, startTimeLørdag, endTimeLørdag, anneFelskov);
 
+
+        createGeneralAvailability(DayOfWeek.MONDAY, startTimeMonday, endTimeMonday, lasseBumbum);
+
+
+        createGeneralAvailability(DayOfWeek.TUESDAY, startTimeTuesday, endTimeTuesday, lasseBumbum);
+
+
+        createGeneralAvailability(DayOfWeek.WEDNESDAY, startTimeWednesday, endTimeWednesday, lasseBumbum);
+
+
+        createGeneralAvailability(DayOfWeek.THURSDAY, startTimeThursday, endTimeThursday, lasseBumbum);
+
+
+        createGeneralAvailability(DayOfWeek.FRIDAY, startTimeFriday, endTimeFriday, lasseBumbum);
+
+
+        createGeneralAvailability(DayOfWeek.SATURDAY, startTimeLørdag, endTimeLørdag, lasseBumbum);
+
+
+
         //APPOINTMENT - Mangler customer og treatment
         /*LocalDateTime appointOneStart = LocalDateTime.of(2023, 12, 1, 10, 0);
         LocalDateTime appointOneEnd = LocalDateTime.of(2023, 12, 1, 10, 30);
