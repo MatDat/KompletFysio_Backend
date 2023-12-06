@@ -1,6 +1,7 @@
 package com.example.kompletfysio_backend.service;
 
 import com.example.kompletfysio_backend.dto.availabilityInterval.AvailabilityInterval;
+import com.example.kompletfysio_backend.dto.timeslot.Timeslot;
 import com.example.kompletfysio_backend.model.GeneralAvailabilityEntity;
 import com.example.kompletfysio_backend.model.UnavailableEntity;
 import com.example.kompletfysio_backend.model.enumPackage.DayOfWeek;
@@ -10,6 +11,7 @@ import com.example.kompletfysio_backend.repository.UnavailableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -75,7 +77,7 @@ public class GeneralAvailabilityService {
         return availabilityIntervals;
     }
 
-    public List<String> getAvailableTimeslots(List<AvailabilityInterval> list, int duration) {
+    public List<Timeslot> getAvailableTimeslots(List<AvailabilityInterval> list, int duration, int employeeID) {
         List<String> timeslots = new ArrayList<>();
         System.out.println("duration: " + duration);
 
@@ -97,7 +99,11 @@ public class GeneralAvailabilityService {
         }
 
         System.out.println(timeslots);
-        return timeslots;
+        List<Timeslot> timeslotList = new ArrayList<>();
+        for (int i = 0; i < timeslots.size(); i++) {
+            timeslotList.add(new Timeslot(employeeID, timeslots.get(i)));
+        }
+        return timeslotList;
     }
 
     private DayOfWeek convertToDayOfWeek(LocalDate date) {

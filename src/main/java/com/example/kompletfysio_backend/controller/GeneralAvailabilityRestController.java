@@ -2,6 +2,7 @@ package com.example.kompletfysio_backend.controller;
 
 import com.example.kompletfysio_backend.dto.availabilityInterval.AvailabilityInterval;
 import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeDTO;
+import com.example.kompletfysio_backend.dto.timeslot.Timeslot;
 import com.example.kompletfysio_backend.service.EmployeeService;
 import com.example.kompletfysio_backend.service.GeneralAvailabilityService;
 import com.example.kompletfysio_backend.service.UnavailableService;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -30,7 +29,7 @@ public class GeneralAvailabilityRestController {
     EmployeeService employeeService;
 
     @GetMapping("/getEmployeeHoursById/{employeeId}/{date}/{duration}")
-    public ResponseEntity<List<String>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
+    public ResponseEntity<List<Timeslot>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
                                                                               @PathVariable("date") String date,
                                                                               @PathVariable("duration") int duration)
     {
@@ -44,11 +43,11 @@ public class GeneralAvailabilityRestController {
         System.out.println(employeeId + ", " + date);
 
         //create the timeslot where the employee can be booked
-        List<String> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration);
+        List<Timeslot> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration, employeeId);
         return new ResponseEntity<>(timeslots, HttpStatus.OK);
     }
-    @GetMapping("/getEmployeeHoursById/{date}/{duration}/{treatmentId}")
-    public ResponseEntity<List<String>> getAvailabilityIntervalOnAnyEmployee(@PathVariable("duration") int duration,
+    @GetMapping("/getAnyEmployeeHours/{date}/{duration}/{treatmentId}")
+    public ResponseEntity<List<Timeslot>> getAvailabilityIntervalOnAnyEmployee(@PathVariable("duration") int duration,
                                                                 @PathVariable("date") String date,
                                                                 @PathVariable("treatmentId") int treatmentId){
 
@@ -60,10 +59,22 @@ public class GeneralAvailabilityRestController {
         List<EmployeeDTO> capableEmployeesDto = employeeService.getEmployeesByTreatmentId(treatmentId);
 
 
+        Set<List<AvailabilityInterval>> availableIntervalSetList = new HashSet<>();
+
         for (EmployeeDTO employeeDTO : capableEmployeesDto){
 
+            List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService
+                    .getAvailabilityFromEmployeeAndDate(employeeDTO.employeeId(), localDate);
+            System.out.println(employeeDTO.employeeId() + ", " + date);
+
+            availableIntervalSetList.add(availabilityIntervalList);
+        }
+
+        List<Timeslot> timeslotList = new ArrayList<>();
+        for (int i = 0; i < availableIntervalSetList.size(); i++) {
 
         }
+
         //TODO fix line below
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
     }
