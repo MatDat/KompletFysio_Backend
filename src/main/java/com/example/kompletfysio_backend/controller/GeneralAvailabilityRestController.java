@@ -59,7 +59,7 @@ public class GeneralAvailabilityRestController {
         List<EmployeeDTO> capableEmployeesDto = employeeService.getEmployeesByTreatmentId(treatmentId);
 
 
-        Set<List<AvailabilityInterval>> availableIntervalSetList = new HashSet<>();
+        List<List<AvailabilityInterval>> availableIntervalListList = new ArrayList<>();
 
         for (EmployeeDTO employeeDTO : capableEmployeesDto){
 
@@ -67,16 +67,25 @@ public class GeneralAvailabilityRestController {
                     .getAvailabilityFromEmployeeAndDate(employeeDTO.employeeId(), localDate);
             System.out.println(employeeDTO.employeeId() + ", " + date);
 
-            availableIntervalSetList.add(availabilityIntervalList);
+            availableIntervalListList.add(availabilityIntervalList);
         }
 
         List<Timeslot> timeslotList = new ArrayList<>();
-        for (int i = 0; i < availableIntervalSetList.size(); i++) {
+        for (int i = 0; i < availableIntervalListList.size(); i++) {
+            List<Timeslot> timeslots = generalAvailabilityService
+                    .getAvailableTimeslots(availableIntervalListList.get(i),
+                            duration,
+                            availableIntervalListList.get(i).get(0).getEmployee_id());
+
+            timeslotList.addAll(timeslots);
 
         }
 
+        LinkedHashSet<Timeslot> tempRemoveDublicates = (LinkedHashSet<Timeslot>) timeslotList;
+        List<Timeslot> timeslotsNoDuplicates = (List<Timeslot>) tempRemoveDublicates;
+
         //TODO fix line below
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+        return new ResponseEntity<>(timeslotsNoDuplicates, HttpStatus.OK);
     }
 
 
