@@ -57,16 +57,16 @@ public class GeneralAvailabilityService {
                     startTime = unavailableEntity.getEndTime();
                     continue;
                 }
-                availabilityIntervals.add(new AvailabilityInterval(startTime, unavailableEntity.getStartTime()));
+                availabilityIntervals.add(new AvailabilityInterval(startTime, unavailableEntity.getStartTime(),employeeId));
                 if (unavailableEntity.getEndTime().isBefore(gAEntity.get().getEndTime())) {
                     startTime = unavailableEntity.getEndTime();
                 } else {
-                    availabilityIntervals.add(new AvailabilityInterval(startTime, gAEntity.get().getEndTime()));
+                    availabilityIntervals.add(new AvailabilityInterval(startTime, gAEntity.get().getEndTime(),employeeId));
                     break;
                 }
             }
         }
-        availabilityIntervals.add(new AvailabilityInterval(startTime, endTime));
+        availabilityIntervals.add(new AvailabilityInterval(startTime, endTime,employeeId));
 
         for (int i = 0; i < availabilityIntervals.size(); i++) {
             System.out.println(availabilityIntervals.get(i));
@@ -80,16 +80,12 @@ public class GeneralAvailabilityService {
         System.out.println("duration: " + duration);
 
         for (int i = 0; i < list.size(); i++) {
-//            int startSlot = list.get(i).getStartTime().getHour()
             LocalDateTime slot = list.get(i).getStartTime();
             boolean toAddSlot = true;
 
             while (toAddSlot) {
-//                System.out.println("duration = " + slot.plusMinutes(duration - 1));
                 if (slot.plusMinutes(duration - 1).isBefore(list.get(i).getEndTime())) {
-
-//
-                    String availableSlot = slot.getHour() + ":" + (slot.getMinute()==(0) ? "00" : slot.getMinute());
+                    String availableSlot = slot.getHour() + ":" + (slot.getMinute() == (0) ? "00" : slot.getMinute());
                     timeslots.add(availableSlot);
                     slot = slot.plusMinutes(duration);
                     //System.out.println("duration = " + slot.plusMinutes(duration));
@@ -97,12 +93,6 @@ public class GeneralAvailabilityService {
                     toAddSlot = false;
                 }
             }
-
-
-            //String endTime = list.get(i).getEndTime().getHour() + ":" + list.get(i).getEndTime().getMinute();
-
-            //lav intervaller indtil vi rammer endTime ;)
-            //System.out.println(startTime + ", " + endTime);
 
         }
 

@@ -1,6 +1,8 @@
 package com.example.kompletfysio_backend.controller;
 
 import com.example.kompletfysio_backend.dto.availabilityInterval.AvailabilityInterval;
+import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeDTO;
+import com.example.kompletfysio_backend.service.EmployeeService;
 import com.example.kompletfysio_backend.service.GeneralAvailabilityService;
 import com.example.kompletfysio_backend.service.UnavailableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class GeneralAvailabilityRestController {
     @Autowired
     UnavailableService unavailableService;
 
+    @Autowired
+    EmployeeService employeeService;
+
     @GetMapping("/getEmployeeHoursById/{employeeId}/{date}/{duration}")
     public ResponseEntity<List<String>> getAvailabilityInterval(@PathVariable("employeeId") int employeeId,
                                                                               @PathVariable("date") String date,
@@ -41,9 +46,28 @@ public class GeneralAvailabilityRestController {
         //create the timeslot where the employee can be booked
         List<String> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration);
         return new ResponseEntity<>(timeslots, HttpStatus.OK);
-
-
     }
+    @GetMapping("/getEmployeeHoursById/{date}/{duration}/{treatmentId}")
+    public ResponseEntity<List<String>> getAvailabilityIntervalOnAnyEmployee(@PathVariable("duration") int duration,
+                                                                @PathVariable("date") String date,
+                                                                @PathVariable("treatmentId") int treatmentId){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // Parse the string into a LocalDate object
+        LocalDate localDate = LocalDate.parse(date, formatter);
+
+        //find capable employees based on treatment_id
+        List<EmployeeDTO> capableEmployeesDto = employeeService.getEmployeesByTreatmentId(treatmentId);
+
+
+        for (EmployeeDTO employeeDTO : capableEmployeesDto){
+
+
+        }
+        //TODO fix line below
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
 
 
 }
