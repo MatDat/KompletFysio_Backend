@@ -15,4 +15,5 @@ public class AvailabilityInterval {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private int employee_id;
 }
