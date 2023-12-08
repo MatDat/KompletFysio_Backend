@@ -43,6 +43,26 @@ public class EmployeeService implements IEmployeeService {
         }
     }
 
+    public ResponseEntity<JwtResponseModel> addNewEmployee(EmployeeDTO employeeDTO) {
+        EmployeeEntity employee = new EmployeeEntity();
+        employee.setEmployeeId(employeeDTO.employeeId());
+        employee.setUsername(employeeDTO.username());
+        employee.setPassword(employeeDTO.password());
+        employee.setPartner(employeeDTO.isPartner());
+        employee.setFirstName(employeeDTO.firstName());
+        employee.setLastName(employeeDTO.lastName());
+
+        if (findByName(employee.getUsername()).size() == 0) {
+            if (save(employee) != null) {
+                return ResponseEntity.ok(new JwtResponseModel("created user: " + employee.getUsername() + " pw: " + employee.getPassword()));
+            } else {
+                return ResponseEntity.ok(new JwtResponseModel("error creating user: " + employee.getUsername()));
+            }
+        } else {
+            return ResponseEntity.ok(new JwtResponseModel("error: user exists: " + employee.getUsername()));
+        }
+    }
+
     public List<EmployeeDTO> getEmployeesByTreatmentId(int treatment_id) {
         //Get a list of employee skills, based on given treatmentId
         List<EmployeeSkillEntity> employeeSkills = employeeSkillRepository.findByTreatment_TreatmentId(treatment_id);

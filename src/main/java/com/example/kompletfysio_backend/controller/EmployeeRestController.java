@@ -14,6 +14,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 
@@ -59,4 +60,15 @@ public class EmployeeRestController {
         List<EmployeeDTO> EmployeeDTOList = employeeService.getEmployeesByTreatmentId(treatment_id);
         return new ResponseEntity<>(EmployeeDTOList, HttpStatus.OK);
     }
+
+    @PostMapping("/addNewEmployee")
+    public ResponseEntity<JwtResponseModel> addNewEmployee(WebRequest wr){
+//        @RequestBody EmployeeDTO request
+
+//        System.out.println("signup: username:" + request.getUsername() + " password: " + request.getPassword() );
+//        return employeeService.addNewEmployee(request);
+    return null;
+    }
+
+
 }
