@@ -63,13 +63,16 @@ public class EmployeeRestController {
     }
 
     @PostMapping("/addNewEmployee")
-    public ResponseEntity<JwtResponseModel> addNewEmployee(@RequestBody EmployeeDTO request, WebRequest wr){
-//        @RequestBody EmployeeDTO request
-        employeeService.addNewEmployee(request, wr);
+    public ResponseEntity<JwtResponseModel> addNewEmployee(WebRequest wr){
+        EmployeeDTO newEmployee = new EmployeeDTO(0,
+                wr.getParameter("firstNameInput"),
+                wr.getParameter("lastNameInput"),
+                wr.getParameter("usernameInput"),
+                wr.getParameter("passwordInput"),
+                Boolean.parseBoolean(wr.getParameter("isPartnerCheckBox"))
+        );
 
-//        System.out.println("signup: username:" + request.getUsername() + " password: " + request.getPassword() );
-//        return employeeService.addNewEmployee(request);
-    return null;
+        return employeeService.signup(newEmployee);
     }
 
 
