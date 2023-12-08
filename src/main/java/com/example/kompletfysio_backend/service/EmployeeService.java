@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.*;
 
@@ -43,18 +44,19 @@ public class EmployeeService implements IEmployeeService {
         }
     }
 
-    public ResponseEntity<JwtResponseModel> addNewEmployee(EmployeeDTO employeeDTO) {
+    public ResponseEntity<JwtResponseModel> addNewEmployee(EmployeeDTO employeeDTO, WebRequest wr) {
         EmployeeEntity employee = new EmployeeEntity();
-        employee.setEmployeeId(employeeDTO.employeeId());
-        employee.setUsername(employeeDTO.username());
-        employee.setPassword(employeeDTO.password());
-        employee.setPartner(employeeDTO.isPartner());
-        employee.setFirstName(employeeDTO.firstName());
-        employee.setLastName(employeeDTO.lastName());
+
+        employee.setFirstName(wr.getParameter("firstNameInput"));
+        employee.setLastName(wr.getParameter("lastNameInput"));
+        employee.setUsername(wr.getParameter("usernameInput"));
+        employee.setPassword(wr.getParameter("passwordInput"));
+        employee.setPartner(Boolean.parseBoolean(wr.getParameter("isPartnerCheckBox")));
 
         if (findByName(employee.getUsername()).size() == 0) {
             if (save(employee) != null) {
-                return ResponseEntity.ok(new JwtResponseModel("created user: " + employee.getUsername() + " pw: " + employee.getPassword()));
+                return ResponseEntity.ok(new JwtResponseModel("created user: "
+                        + employee.getUsername() + " pw: " + employee.getPassword()));
             } else {
                 return ResponseEntity.ok(new JwtResponseModel("error creating user: " + employee.getUsername()));
             }

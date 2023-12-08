@@ -2,6 +2,7 @@ package com.example.kompletfysio_backend.controller;
 
 import com.example.kompletfysio_backend.JwtTokenManager;
 import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeDTO;
+import com.example.kompletfysio_backend.model.EmployeeEntity;
 import com.example.kompletfysio_backend.model.JwtResponseModel;
 import com.example.kompletfysio_backend.service.EmployeeService;
 import com.example.kompletfysio_backend.service.JwtEmployeeDetailsService;
@@ -62,8 +63,9 @@ public class EmployeeRestController {
     }
 
     @PostMapping("/addNewEmployee")
-    public ResponseEntity<JwtResponseModel> addNewEmployee(WebRequest wr){
+    public ResponseEntity<JwtResponseModel> addNewEmployee(@RequestBody EmployeeDTO request, WebRequest wr){
 //        @RequestBody EmployeeDTO request
+        employeeService.addNewEmployee(request, wr);
 
 //        System.out.println("signup: username:" + request.getUsername() + " password: " + request.getPassword() );
 //        return employeeService.addNewEmployee(request);
