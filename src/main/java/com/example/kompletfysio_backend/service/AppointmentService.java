@@ -40,7 +40,7 @@ public class AppointmentService {
     public ResponseEntity<AppointmentDTO> save(AppointmentDTO appointmentDTO){
         System.out.println("TEST1");
         AppointmentEntity appointment = new AppointmentEntity();
-        appointment.setAppointmentId(appointmentDTO.appointmentID());
+//        appointment.setAppointmentId(appointmentDTO.appointmentID());
         appointment.setStartTime(appointmentDTO.startTime());
         appointment.setEndTime(appointmentDTO.endtime());
         appointment.setNote(appointmentDTO.note());

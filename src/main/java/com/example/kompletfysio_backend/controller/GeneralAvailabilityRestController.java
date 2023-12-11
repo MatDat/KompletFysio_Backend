@@ -40,11 +40,13 @@ public class GeneralAvailabilityRestController {
         LocalDate localDate = LocalDate.parse(date, formatter);
 
         //create the intervals where the employee can work in
-        List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService.getAvailabilityFromEmployeeAndDate(1, localDate);
+        List<AvailabilityInterval> availabilityIntervalList = generalAvailabilityService.getAvailabilityFromEmployeeAndDate(employeeId, localDate);
         System.out.println(employeeId + ", " + date);
+        //TODO - if List above is empty (no time is available), the program fails
 
         //create the timeslot where the employee can be booked
         List<Timeslot> timeslots = generalAvailabilityService.getAvailableTimeslots(availabilityIntervalList, duration, employeeId);
+
         return new ResponseEntity<>(timeslots, HttpStatus.OK);
     }
     @GetMapping("/getAnyEmployeeHours/{date}/{duration}/{treatmentId}")
