@@ -1,7 +1,9 @@
 package com.example.kompletfysio_backend.controller;
 
 import com.example.kompletfysio_backend.JwtTokenManager;
+import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeConverter;
 import com.example.kompletfysio_backend.dto.dtoemployee.EmployeeDTO;
+import com.example.kompletfysio_backend.model.EmployeeEntity;
 import com.example.kompletfysio_backend.model.JwtResponseModel;
 import com.example.kompletfysio_backend.service.EmployeeService;
 import com.example.kompletfysio_backend.service.JwtEmployeeDetailsService;
@@ -14,6 +16,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 
@@ -59,4 +62,10 @@ public class EmployeeRestController {
         List<EmployeeDTO> EmployeeDTOList = employeeService.getEmployeesByTreatmentId(treatment_id);
         return new ResponseEntity<>(EmployeeDTOList, HttpStatus.OK);
     }
+
+    @PostMapping("/addNewEmployee")
+    public ResponseEntity<JwtResponseModel> addNewEmployee(@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.signup(employeeDTO);
+    }
+
 }
