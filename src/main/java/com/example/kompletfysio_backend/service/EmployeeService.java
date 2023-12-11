@@ -44,26 +44,26 @@ public class EmployeeService implements IEmployeeService {
         }
     }
 
-    public ResponseEntity<JwtResponseModel> addNewEmployee(EmployeeDTO employeeDTO, WebRequest wr) {
-        EmployeeEntity employee = new EmployeeEntity();
-
-        employee.setFirstName(wr.getParameter("firstNameInput"));
-        employee.setLastName(wr.getParameter("lastNameInput"));
-        employee.setUsername(wr.getParameter("usernameInput"));
-        employee.setPassword(wr.getParameter("passwordInput"));
-        employee.setPartner(Boolean.parseBoolean(wr.getParameter("isPartnerCheckBox")));
-
-        if (findByName(employee.getUsername()).size() == 0) {
-            if (save(employee) != null) {
-                return ResponseEntity.ok(new JwtResponseModel("created user: "
-                        + employee.getUsername() + " pw: " + employee.getPassword()));
-            } else {
-                return ResponseEntity.ok(new JwtResponseModel("error creating user: " + employee.getUsername()));
-            }
-        } else {
-            return ResponseEntity.ok(new JwtResponseModel("error: user exists: " + employee.getUsername()));
-        }
-    }
+//    public ResponseEntity<JwtResponseModel> addNewEmployee(EmployeeDTO employeeDTO, WebRequest wr) {
+//        EmployeeEntity employee = new EmployeeEntity();
+//
+//        employee.setFirstName(wr.getParameter("firstNameInput"));
+//        employee.setLastName(wr.getParameter("lastNameInput"));
+//        employee.setUsername(wr.getParameter("usernameInput"));
+//        employee.setPassword(wr.getParameter("passwordInput"));
+//        employee.setPartner(Boolean.parseBoolean(wr.getParameter("isPartnerCheckBox")));
+//
+//        if (findByName(employee.getUsername()).size() == 0) {
+//            if (save(employee) != null) {
+//                return ResponseEntity.ok(new JwtResponseModel("created user: "
+//                        + employee.getUsername() + " pw: " + employee.getPassword()));
+//            } else {
+//                return ResponseEntity.ok(new JwtResponseModel("error creating user: " + employee.getUsername()));
+//            }
+//        } else {
+//            return ResponseEntity.ok(new JwtResponseModel("error: user exists: " + employee.getUsername()));
+//        }
+//    }
 
     public List<EmployeeDTO> getEmployeesByTreatmentId(int treatment_id) {
         //Get a list of employee skills, based on given treatmentId
