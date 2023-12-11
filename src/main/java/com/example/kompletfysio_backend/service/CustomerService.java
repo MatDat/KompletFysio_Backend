@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,6 +56,17 @@ public class CustomerService {
 
     public Optional<CustomerEntity> findById(Long aLong) {
         return customerRepository.findById(aLong.intValue());
+    }
+
+    public List<CustomerDTO> getAllCustomers () {
+//        return customerRepository. todo
+        List<CustomerEntity> allCustomers = new ArrayList<>();
+//        for (int i = 0; i < ; i++) {
+//            customerRepository.findAllByCustomerId(i);
+//        }
+
+
+        return null;
     }
 
 }
