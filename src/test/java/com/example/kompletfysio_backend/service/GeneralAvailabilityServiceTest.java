@@ -55,8 +55,11 @@ class GeneralAvailabilityServiceTest {
         List<Timeslot> actual = generalAvailabilityService
                 .getAvailableTimeslots(availabilityIntervalList, 90, 1);
         //ASSERT
-        assertEquals(3, actual.size());
+        assertEquals(expected.size(), actual.size());
+
         //kommentar
+        fail();
+
     }
 
 
