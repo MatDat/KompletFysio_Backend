@@ -10,7 +10,7 @@ on:
   pull_request:
     types: [ opened, synchronize, reopened, closed ]
     branches:
-      - main
+      - Main
 #  workflow_dispatch:
 
 jobs:
