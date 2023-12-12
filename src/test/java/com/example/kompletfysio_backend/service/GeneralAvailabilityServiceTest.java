@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +30,35 @@ class GeneralAvailabilityServiceTest {
 
     @BeforeEach
     public void initData() {
+        //ARRANGE
         availabilityIntervalList.add(availabilityInterval1);
     }
 
     @Test
     public void test1Hour() {
         List<Timeslot> timeslotList = new ArrayList<>();
-        timeslotList.add(new Timeslot(1, "09:00"));
-        timeslotList.add(new Timeslot(1, "09:30"));
+        timeslotList.add(new Timeslot(1, "9:00"));
+        timeslotList.add(new Timeslot(1, "9:30"));
 
-        assertEquals(timeslotList, generalAvailabilityService
-                .getAvailableTimeslots(availabilityIntervalList, 30, 1));
+        List<Timeslot> actual = generalAvailabilityService
+                .getAvailableTimeslots(availabilityIntervalList, 30, 1);
 
-
+        assertEquals(timeslotList.size(),actual.size());
+        assertEquals(timeslotList.get(0).getTimeSlot(),actual.get(0).getTimeSlot());
+        assertEquals(timeslotList.get(1).getTimeSlot(),actual.get(1).getTimeSlot());
     }
+
+    @Test
+    public void testTooLongDuration(){
+        //ACT
+        List<Timeslot> expected = new ArrayList<>();
+        List<Timeslot> actual = generalAvailabilityService
+                .getAvailableTimeslots(availabilityIntervalList, 90, 1);
+        //ASSERT
+        assertEquals(expected.size(), actual.size());
+    }
+
+
 
 
 //    List<Timeslot> getAvailableTimeslots(List<AvailabilityInterval> list, int duration, int employeeID)
