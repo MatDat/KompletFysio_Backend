@@ -49,6 +49,17 @@ public class CustomerService {
 
         return new ResponseEntity<>(customerConverter.toDTO(customerRepository.save(customerEntity)), HttpStatus.OK);
     }
+    public ResponseEntity<CustomerDTO> logIn(CustomerRequestBody customerRequestBody){
+        Optional<CustomerEntity> optionalCustomer = customerRepository
+                .findByUsernameAndPassword(customerRequestBody.username(),customerRequestBody.password());
+
+        if (optionalCustomer.isPresent()){
+            return new ResponseEntity<>(customerConverter.toDTO(optionalCustomer.get()),HttpStatus.OK);
+        }else {
+           return null;
+        }
+
+    }
 
 
 

@@ -41,7 +41,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 // "antMathcers" comes from Apache Ant build system.
                 // Since Spring 3, the next line replaces the old one:
                 // .authorizeRequests().antMatchers("/login", "/signup").permitAll()
-                .authorizeHttpRequests().requestMatchers("/login","/saveCustomer", "/signup","/allTreatments","/appointment","/getEmployeeByTreatmentId/{treatment_id}","/getEmployeeHoursById/{employeeId}/{date}/{duration}", "/getAnyEmployeeHours/{date}/{duration}/{treatmentId}", "/addNewEmployee").permitAll()
+                .authorizeHttpRequests().requestMatchers("/login","/saveCustomer", "/signup","/allTreatments","/appointment","/getEmployeeByTreatmentId/{treatment_id}","/getEmployeeHoursById/{employeeId}/{date}/{duration}", "/getAnyEmployeeHours/{date}/{duration}/{treatmentId}", "/addNewEmployee", "/logInCustomer").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
