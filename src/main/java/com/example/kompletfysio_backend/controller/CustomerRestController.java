@@ -22,11 +22,22 @@ public class CustomerRestController {
         return customerService.saveCustomer(customerRB);
     }
 
+    //todo test if this works
     @GetMapping("/getAllCustomers")
-    public List<CustomerDTO> getAllCustomers () {
-//        return customerService.
-        return null;
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers () {
+        List<CustomerDTO> customerDTOList = customerService.getAllCustomers();
+        return new ResponseEntity<>(customerDTOList, HttpStatus.OK);
     }
+
+
+    /*
+    @GetMapping("/allTreatments")
+    //@ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<TreatmentDTO>> getAllTreatments(){
+        List<TreatmentDTO> treatmentDTOList = treatmentService.getAllTreatments();
+        return new ResponseEntity<>(treatmentDTOList, HttpStatus.OK);
+    }
+     */
 
 
 }

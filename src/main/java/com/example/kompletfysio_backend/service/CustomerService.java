@@ -3,9 +3,11 @@ package com.example.kompletfysio_backend.service;
 import com.example.kompletfysio_backend.dto.dtocustomer.CustomerConverter;
 import com.example.kompletfysio_backend.dto.dtocustomer.CustomerDTO;
 import com.example.kompletfysio_backend.dto.dtocustomer.CustomerRequestBody;
+import com.example.kompletfysio_backend.dto.dtotreamtment.TreatmentDTO;
 import com.example.kompletfysio_backend.model.CityEntity;
 import com.example.kompletfysio_backend.model.CustomerEntity;
 import com.example.kompletfysio_backend.model.EmployeeEntity;
+import com.example.kompletfysio_backend.model.TreatmentEntity;
 import com.example.kompletfysio_backend.repository.CityRepository;
 import com.example.kompletfysio_backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,15 +60,15 @@ public class CustomerService {
         return customerRepository.findById(aLong.intValue());
     }
 
-    public List<CustomerDTO> getAllCustomers () {
-//        return customerRepository. todo
-        List<CustomerEntity> allCustomers = new ArrayList<>();
-//        for (int i = 0; i < ; i++) {
-//            customerRepository.findAllByCustomerId(i);
-//        }
+    //todo test this
+    public List<CustomerDTO> getAllCustomers(){
+        List<CustomerEntity> customerEntityList = customerRepository.findAll();
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
 
-
-        return null;
+        for (CustomerEntity customerEntity: customerEntityList) {
+            customerDTOList.add(customerConverter.toDTO(customerEntity));
+        }
+        return customerDTOList;
     }
 
 }
