@@ -22,6 +22,10 @@ public class CustomerRestController {
         return customerService.saveCustomer(customerRB);
     }
 
+    @PostMapping("/logInCustomer")
+    public ResponseEntity<CustomerDTO> logInCustomer(@RequestBody CustomerRequestBody customerRequestBody){
+        return customerService.logIn(customerRequestBody);
+    }
     //todo test if this works
     @GetMapping("/getAllCustomers")
     public ResponseEntity<List<CustomerDTO>> getAllCustomers () {
