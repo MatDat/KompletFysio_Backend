@@ -6,10 +6,9 @@ import com.example.kompletfysio_backend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -27,5 +26,22 @@ public class CustomerRestController {
     public ResponseEntity<CustomerDTO> logInCustomer(@RequestBody CustomerRequestBody customerRequestBody){
         return customerService.logIn(customerRequestBody);
     }
+    //todo test if this works
+    @GetMapping("/getAllCustomers")
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers () {
+        List<CustomerDTO> customerDTOList = customerService.getAllCustomers();
+        return new ResponseEntity<>(customerDTOList, HttpStatus.OK);
+    }
+
+
+    /*
+    @GetMapping("/allTreatments")
+    //@ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<TreatmentDTO>> getAllTreatments(){
+        List<TreatmentDTO> treatmentDTOList = treatmentService.getAllTreatments();
+        return new ResponseEntity<>(treatmentDTOList, HttpStatus.OK);
+    }
+     */
+
 
 }

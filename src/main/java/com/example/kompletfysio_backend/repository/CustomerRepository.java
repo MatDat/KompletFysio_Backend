@@ -12,4 +12,6 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
 
     Optional<CustomerEntity> findByUsernameAndPassword(String user, String pass);
+
+    CustomerEntity findAllByCustomerId(int id);
 }
