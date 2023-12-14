@@ -1,7 +1,6 @@
 package com.example.kompletfysio_backend.config;
 
 
-
 import com.example.kompletfysio_backend.JwtAuthenticationEntryPoint;
 import com.example.kompletfysio_backend.JwtFilter;
 import lombok.AllArgsConstructor;
@@ -25,9 +24,10 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
     private JwtFilter filter;
     private static PasswordEncoder passwordEncoder;
+
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        if(passwordEncoder==null){
+        if (passwordEncoder == null) {
             passwordEncoder = new BCryptPasswordEncoder();
         }
         return passwordEncoder;
@@ -41,7 +41,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 // "antMathcers" comes from Apache Ant build system.
                 // Since Spring 3, the next line replaces the old one:
                 // .authorizeRequests().antMatchers("/login", "/signup").permitAll()
-                .authorizeHttpRequests().requestMatchers("/login","/saveCustomer", "/signup","/allTreatments","/appointment","/getEmployeeByTreatmentId/{treatment_id}","/getEmployeeHoursById/{employeeId}/{date}/{duration}", "/getAnyEmployeeHours/{date}/{duration}/{treatmentId}", "/addNewEmployee", "/getAllCustomers","/logInCustomer").permitAll()
+                .authorizeHttpRequests().requestMatchers("/login", "/saveCustomer", "/signup", "/allTreatments", "/appointment", "/getEmployeeByTreatmentId/{treatment_id}", "/getEmployeeHoursById/{employeeId}/{date}/{duration}", "/getAnyEmployeeHours/{date}/{duration}/{treatmentId}", "/addNewEmployee", "/getAllCustomers", "/logInCustomer").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
@@ -61,7 +61,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         System.out.println("addCorsMappings called");
         registry.addMapping("/**")  // /** means match any string recursively
-                .allowedOriginPatterns("http://localhost:*") //Multiple strings allowed. Wildcard * matches all port numbers.
+                .allowedOriginPatterns("http://localhost:*", "https://jolly-desert-09392c710.4.azurestaticapps.net/**") //Multiple strings allowed. Wildcard * matches all port numbers.
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS") // decide which methods to allow
                 .allowCredentials(true);
     }
