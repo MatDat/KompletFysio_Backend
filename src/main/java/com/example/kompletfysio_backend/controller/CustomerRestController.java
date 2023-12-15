@@ -26,7 +26,8 @@ public class CustomerRestController {
     public ResponseEntity<CustomerDTO> logInCustomer(@RequestBody CustomerRequestBody customerRequestBody){
         return customerService.logIn(customerRequestBody);
     }
-    //todo test if this works
+    //THIS ENDPOINT ONLY WORKS WITH TOKEN
+    //GET TOKEN BY /login with employee credentials
     @GetMapping("/getAllCustomers")
     public ResponseEntity<List<CustomerDTO>> getAllCustomers () {
         List<CustomerDTO> customerDTOList = customerService.getAllCustomers();
